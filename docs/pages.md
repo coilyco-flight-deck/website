@@ -20,7 +20,9 @@ under [src/pages/](../src/pages/) so the resume keeps its canonical source.
 - **`hiring.njk`** - recruiting surface linked from the primary
   navigation. It is a project-free information reference covering Kai's
   strongest role shapes, practical constraints, recruiter context, interview
-  boundaries, and tenure context.
+  boundaries, and how she frames a short resume. The tenure section states the
+  benchmark and offers the detail in conversation rather than explaining any
+  departure, which `lore-self-capacity-and-tenure` keeps off a public surface.
 - **`writing.njk`** - date-ordered listing of the promoted posts, and
   indexable. It is still unlinked from the homepage, which issue #98 owns.
 - **`coilysiren-personal-gmail-privacy.md`** - privacy and contact notice for the `coilysiren-personal-gmail` OAuth client.
