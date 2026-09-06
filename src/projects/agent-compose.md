@@ -167,11 +167,11 @@ derived and recorded, which is why `describe` has something to render.
   </div>
   <div>
     <dt><span class="project__n">3</span> delivery</dt>
-    <dd>The shape the target harness wants. The selected context does not change with it.</dd>
+    <dd>The shape the target harness wants. The selected context doesn't change with it.</dd>
   </div>
   <div>
     <dt><span class="project__n">4</span> source</dt>
-    <dd>A skill-provider repository the role is allowed to see. What it does not name, the seat never reads.</dd>
+    <dd>A skill-provider repository the role is allowed to see. What it doesn't name, the seat never reads.</dd>
   </div>
 </dl>
 {% endsection %}
@@ -198,9 +198,9 @@ a token or touches a deployed system.
 </div>
 {% endsection %}
 
-{% section { id: "not-permission", band: "lilac", accent: "refuse", label: "What it does not do", heading: "agent-compose is not a permission system." } %}
+{% section { id: "not-permission", band: "lilac", accent: "refuse", label: "What it doesn't do", heading: "agent-compose is not a permission system." } %}
 <b>A role is context, never permission.</b> It has no opinion about what an agent
-may execute, and it cannot stop anything. A composed seat that says it defers an
+may execute, and it can't stop anything. A composed seat that says it defers an
 action will still run that action if the runtime hands it the tool, because prose
 is not a control.
 

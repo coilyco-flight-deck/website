@@ -45,7 +45,7 @@ project:
 
 {% section { id: "problem", band: "penumbra", accent: "cost",
              label: "The problem, and what it costs to leave alone",
-             heading: "Most teams cannot answer that question." } %}
+             heading: "Most teams can't answer that question." } %}
 The answer is spread across a system prompt, a tool definition, an allowlist
 somebody added during an incident, and whichever binaries happen to be on the
 container. When something goes wrong the question changes from what was allowed to
@@ -53,7 +53,7 @@ what actually happened, and that answer is usually worse, because what you have 
 an agent transcript rather than a log.
 
 The expensive failure is not the runaway agent that deletes a repository. That one
-is rare and memorable. The expensive failure is that you cannot answer either
+is rare and memorable. The expensive failure is that you can't answer either
 question in a review, so the safe call is to give the agent less than it needs, and
 the automation quietly stays a demo.
 {% endsection %}
@@ -61,7 +61,7 @@ the automation quietly stays a demo.
 {% section { id: "how-it-works", band: "lilac", accent: "grant",
              label: "What it does about it",
              heading: "umbra sits between semi-trusted automation and the host system." } %}
-What you did not declare does not get through. The boundary lives in a KDL guardfile
+What you didn't declare doesn't get through. The boundary lives in a KDL guardfile
 rather than in code, so it is one artifact a reviewer reads in a sitting. umbra ships
 no denylist and knows nothing about your tools. The policy is yours, and umbra
 enforces it across two surfaces: subprocess execution and outbound HTTP requests.
@@ -116,7 +116,7 @@ is unreachable, because grants are deny-by-default and an unknown node fails clo
 {% endsection %}
 
 {% section { id: "not-a-sandbox", band: "lilac", accent: "refuse",
-             label: "What it does not do",
+             label: "What it doesn't do",
              heading: "umbra is not a sandbox." } %}
 {% note %}
 It performs no execution isolation at all, and that is deliberate rather than

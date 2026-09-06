@@ -6,7 +6,7 @@ pagination:
   alias: variant
 permalink: "{% if variant == 'vanity' %}vanity/housecast/index.html{% else %}projects/housecast/index.html{% endif %}"
 title: housecast, a YAML driven roster framework for agent context | Kai Ase Siren
-description: You changed what a role is allowed to do. The evaluation that checked it did not notice. housecast composes agent context from one YAML roster and derives the evaluation board from the same file.
+description: You changed what a role is allowed to do. The evaluation that checked it didn't notice. housecast composes agent context from one YAML roster and derives the evaluation board from the same file.
 canonical: /projects/housecast/
 robots: follow, index
 softwareSchema:
@@ -20,7 +20,7 @@ project:
   hasMark: false
   eyebrow: Roster // the context an agent loads
   claim: A YAML driven roster framework for agent context
-  hook: You changed what a role is allowed to do. The evaluation that checked it did not notice.
+  hook: You changed what a role is allowed to do. The evaluation that checked it didn't notice.
   caption: The frontend role never declares what it owns. The boundary's own owner line is what makes this a deferral, and the scope string is what a grader reads a transcript against.
   meta:
     - Preview
@@ -48,7 +48,7 @@ project:
 
 {% section { id: "problem", band: "penumbra", accent: "cost",
              label: "The problem, and what it costs to leave alone",
-             heading: "A charter written as prose cannot fail a test." } %}
+             heading: "A charter written as prose can't fail a test." } %}
 An agent's role usually lives in a prompt file. What it does, what it may touch,
 what it hands to someone else. That file is the entire specification, and the
 only thing enforcing it is that the model read it carefully on the way past.
@@ -74,7 +74,7 @@ roster, and emits an immutable bundle with a manifest and a trace.
 
 Boundary allocation is not something a role declares. A boundary names its owner,
 and every other role either defers it or holds a stated slice of it. A role
-cannot claim what it does not own, because the claim is derived from the other
+can't claim what it doesn't own, because the claim is derived from the other
 side of the relationship rather than asserted on this one.
 
 The challenge board derives from that same file. Adding a boundary or changing
@@ -100,11 +100,11 @@ role, and it may not declare that last one itself.
 
 The scope string is prose and it is load-bearing. It is the sentence a grader
 reads a transcript against, which is why "labels and error text inside a surface
-you own" earns its place and "handles frontend copy" would not.
+you own" earns its place and "handles frontend copy" wouldn't.
 {% endsection %}
 
 {% section { id: "not-a-framework", band: "lilac", accent: "refuse",
-             label: "What it does not do",
+             label: "What it doesn't do",
              heading: "It composes context. It runs nothing." } %}
 housecast emits a bundle and stops. `acompose` is downstream of it, rendering
 that bundle into harness surfaces and launching them. The two are often read the

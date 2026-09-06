@@ -121,7 +121,7 @@ issues, and can do nothing else to the host it points at.
   </div>
   <div>
     <dt><span class="project__n">3</span> restrict</dt>
-    <dd>Every <code>{owner}</code> path leaf must match, so a granted verb still cannot travel outside the accounts you named.</dd>
+    <dd>Every <code>{owner}</code> path leaf must match, so a granted verb still can't travel outside the accounts you named.</dd>
   </div>
   <div>
     <dt><span class="project__n">4</span> can get</dt>
