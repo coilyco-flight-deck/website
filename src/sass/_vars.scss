@@ -1,17 +1,68 @@
-$light-blue: #dff0ea;
-$mid-blue: #95adbe;
-$light-purple: #9192bb;
-$faint-purple: #9e9fc2;
-$mid-purple: #574f7d;
-$dark-purple: #3e375d;
-$off-white: #eeeeee;
+// Coilyco palette. Structure sits on hue 294 in OKLCH, the hue of the brand
+// purple, and varies only in lightness and chroma. A colour leaves that hue
+// only where the meaning is culturally locked to one - a refusal, a cost, a
+// grant - because a warning that matched the brand would stop reading as a
+// warning. Derivation and the audit behind it: docs/brand.md.
+
+// Ground and structure, darkest first.
+$deep-ink: #120b24;
+$ink: #1e1534;
+$dark-purple: #352061;
+$mid-purple: #5d3ba3;
+
+// The mark. Too saturated to carry small text on either ground - 3.14:1 on
+// $deep-ink - so it fills and marks rather than labels.
+$brand-purple: #7c2bef;
+
+// Accents that do carry text.
+$light-purple: #a686fc;
+$faint-purple: #bbaaf7;
+
+// The two former teals. Same jobs, moved onto the brand hue.
+$mid-blue: #a6a0bf;
+$light-blue: #ebe9f8;
+
+// Light surfaces, tinted toward the hue so they read as chosen rather than as
+// the absence of a colour. $paper was a warm cream 114 degrees off.
+$paper: #faf9fe;
+$off-white: #f0eff6;
 $pure-white: #ffffff;
-$paper: #fbfaf7;
-$ink: #29243f;
-$deep-ink: #211c33;
-$coral: #dc8f72;
-$sage: #7f9f8d;
-$focus: #f0bd68;
+
+// Section and card caps. Hue is spent on the brand, so lightness is what tells
+// these apart. Replaces a coral/sage/purple trio that varied by hue instead.
+$cap-1: #5000a3;
+$cap-2: #7c2bef;
+$cap-3: #a686fc;
+
+// Dark tiles that need to differ from each other and from $mid-purple. Same
+// principle: three steps down one hue.
+$tile-2: #392a5e;
+$tile-2-hover: #4c3a7a;
+$tile-3: #24193f;
+$tile-3-hover: #362859;
+
+// Project-page registers, named for the job rather than the pigment. A token
+// called $grant is not something anyone reaches for because it is a nice
+// green. Three keep their own hue because the meaning is locked to it. The
+// last two are context rather than signal, so they sit on 294.
+$cost: #f28881;
+$refuse: #f4aa27;
+$grant: #76be86;
+$context: #aca5c8;
+$reference: #b39bfd;
+
+// The same five re-struck for a light band, where none of the above survives.
+$cost-on-light: #862726;
+$refuse-on-light: #784a00;
+$grant-on-light: #0b5d2a;
+$context-on-light: #574f71;
+$reference-on-light: #5d3ba3;
+
+$error: #ff4d6d;
+
+// Focus has to clear 3:1 against both grounds at once. The previous amber ring
+// cleared the dark one and sat at 1.65:1 on $paper.
+$focus: #a46bff;
 
 $font-family-body: "Roboto", sans-serif;
 $font-family-mono: SFMono-Regular, Consolas, Menlo, monospace;

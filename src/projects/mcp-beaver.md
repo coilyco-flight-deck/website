@@ -45,7 +45,7 @@ project:
     <span class="k">withhold</span> <span class="s">"delete_issue"</span> { <span class="k">reason</span> <span class="s">"No undo."</span> }</code></pre>
 ---
 
-{% section { id: "problem", band: "penumbra", accent: "coral", label: "The problem, and what it costs to leave alone", heading: "By the fourth service it is four codebases." } %}
+{% section { id: "problem", band: "penumbra", accent: "cost", label: "The problem, and what it costs to leave alone", heading: "By the fourth service it is four codebases." } %}
 Exposing one service to an agent means writing a Go package, a handler per tool,
 an input schema per tool, and a Dockerfile. Then a reviewer reads all four and
 decides whether they believe the combination. Do it again for the next service,
@@ -58,7 +58,7 @@ verb is that nobody wrote a tool for it yet. Somebody will, because adding one i
 a small pull request.
 {% endsection %}
 
-{% section { id: "how-it-works", band: "lilac", accent: "mint", label: "What it does about it", heading: "One runtime, many guardfiles." } %}
+{% section { id: "how-it-works", band: "lilac", accent: "grant", label: "What it does about it", heading: "One runtime, many guardfiles." } %}
 mcp-beaver renders an <a href="/projects/umbra/">umbra</a> guardfile into a guarded
 MCP server and a matching HTTP tool API, baked into one generic image. Each
 `can` grant is one MCP tool named `verb_resource`, and its
@@ -96,7 +96,7 @@ spec mode it never parses the guardfile at all.
 listener, so a guardfile is validated in CI before it is ever mounted.
 {% endsection %}
 
-{% section { id: "spec", band: "umbra", accent: "mint", label: "What it looks like in use", heading: "The reviewable surface is one small file, read end to end." } %}
+{% section { id: "spec", band: "umbra", accent: "grant", label: "What it looks like in use", heading: "The reviewable surface is one small file, read end to end." } %}
 This is the whole contract for a server that can read, file, comment on, and close
 issues, and can do nothing else to the host it points at.
 
@@ -138,7 +138,7 @@ policy, unimplemented, not offered upstream, or simply not found by the agent's
 search. An agent guesses between them, and it guesses wrong in both directions.
 {% endsection %}
 
-{% section { id: "coverage", band: "penumbra", accent: "sage", label: "A design call worth stating", heading: "Every result opens with what it counted." } %}
+{% section { id: "coverage", band: "penumbra", accent: "context", label: "A design call worth stating", heading: "Every result opens with what it counted." } %}
 Grant-backed results are <code>{"coverage": {...}, "result": ...}</code>, in that
 order, in both the text and the structured content. Coverage names every array in
 the payload and its length, because a count in meaning is what changes an answer.
@@ -154,7 +154,7 @@ though the view were complete.
 </div>
 {% endsection %}
 
-{% section { id: "not-a-gateway", band: "lilac", accent: "amber", label: "What the deployment owns", heading: "Caller identity belongs to the deployment." } %}
+{% section { id: "not-a-gateway", band: "lilac", accent: "refuse", label: "What the deployment owns", heading: "Caller identity belongs to the deployment." } %}
 Caller identity, TLS, ingress, and network reachability belong to whatever runs
 mcp-beaver, and it expects to sit behind them rather than to be an API gateway or
 an identity layer. Guardfile `auth` configures mcp-beaver's own credential to the
@@ -196,12 +196,12 @@ The distinction is worth carrying, because the two modes earn different sentence
 and only one of them earns the stronger one.
 {% endsection %}
 
-{% section { id: "stack", extraClass: "project__chain", band: "penumbra", accent: "sage", label: "One boundary, three proofs", heading: "Constrain what an agent can do, and prove what it did." } %}
+{% section { id: "stack", extraClass: "project__chain", band: "penumbra", accent: "context", label: "One boundary, three proofs", heading: "Constrain what an agent can do, and prove what it did." } %}
 {% set here = "mcp-beaver" %}
 {% include "components/project-chain.njk" %}
 {% endsection %}
 
-{% section { id: "reference", band: "umbra", accent: "peri", label: "Repository and docs", heading: "Reference" } %}
+{% section { id: "reference", band: "umbra", accent: "reference", label: "Repository and docs", heading: "Reference" } %}
 <ul class="project__links">
   <li><a href="https://github.com/coilyco-flight-deck/mcp-beaver">Repository ↗</a></li>
   <li><a href="https://github.com/coilyco-flight-deck/mcp-beaver/blob/main/docs/FEATURES.md">docs/FEATURES.md ↗</a></li>

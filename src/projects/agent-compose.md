@@ -44,7 +44,7 @@ project:
     }</code></pre>
 ---
 
-{% section { id: "problem", band: "penumbra", accent: "coral", label: "The problem, and what it costs to leave alone", heading: "Who an agent is and what an agent may do end up in the same blob." } %}
+{% section { id: "problem", band: "penumbra", accent: "cost", label: "The problem, and what it costs to leave alone", heading: "Who an agent is and what an agent may do end up in the same blob." } %}
 The usual shape is one long system prompt carrying the voice, the job, the house
 rules, the tool list, and a few sentences that are really an authority claim. It
 is edited by whoever is closest to the problem that week. Nothing about it is
@@ -58,7 +58,7 @@ absorbs the other's work, and the only evidence is a transcript somebody has to
 read by hand.
 {% endsection %}
 
-{% section { id: "roster", band: "umbra", accent: "mint", label: "The zero-config default", heading: "Seven seats, each with a name and a meld." } %}
+{% section { id: "roster", band: "umbra", accent: "grant", label: "The zero-config default", heading: "Seven seats, each with a name and a meld." } %}
 `roster:core` ships seven seats. Each one carries a charter and a meld of two
 personality traits that shape how it writes and what it reaches for first.
 
@@ -107,7 +107,7 @@ personalities, and evaluation context, and it replaces `roster:core` wholesale
 rather than merging with it, so no seat inherits half of somebody else's charter.
 {% endsection %}
 
-{% section { id: "how-it-works", band: "lilac", accent: "mint", label: "What it does about it", heading: "agent-compose compiles the context a harness loads, and nothing else." } %}
+{% section { id: "how-it-works", band: "lilac", accent: "grant", label: "What it does about it", heading: "agent-compose compiles the context a harness loads, and nothing else." } %}
 It selects a role, the personality meld that role carries, the skills that role can
 see, and the tool inventory it gets, then materializes one immutable bundle of
 plain files. Claude Code, Codex, Goose, and OpenCode all take the same bundle.
@@ -143,7 +143,7 @@ a seat inherits half of somebody else's charter.
 {% endsection %}
 
 
-{% section { id: "request", band: "umbra", accent: "mint", label: "What it looks like in use", heading: "The reviewable surface is the request and the bundle it produced." } %}
+{% section { id: "request", band: "umbra", accent: "grant", label: "What it looks like in use", heading: "The reviewable surface is the request and the bundle it produced." } %}
 Four lines name a seat, the shape the harness wants it in, and where the
 role-scoped skills are allowed to come from. Everything downstream of that is
 derived and recorded, which is why `describe` has something to render.
@@ -176,7 +176,7 @@ derived and recorded, which is why `describe` has something to render.
 </dl>
 {% endsection %}
 
-{% section { id: "eval-driven", band: "penumbra", accent: "sage", label: "The credibility half", heading: "The board comes from the roster itself." } %}
+{% section { id: "eval-driven", band: "penumbra", accent: "context", label: "The credibility half", heading: "The board comes from the roster itself." } %}
 Boundaries and their owners produce the pairs. Adjacency produces the role-fit
 targets. Each role's meld produces the personality cases. Add a boundary, flip an
 adjacency edge, or swap a personality, and the challenge list moves on its own.
@@ -198,7 +198,7 @@ a token or touches a deployed system.
 </div>
 {% endsection %}
 
-{% section { id: "not-permission", band: "lilac", accent: "amber", label: "What it does not do", heading: "agent-compose is not a permission system." } %}
+{% section { id: "not-permission", band: "lilac", accent: "refuse", label: "What it does not do", heading: "agent-compose is not a permission system." } %}
 <b>A role is context, never permission.</b> It has no opinion about what an agent
 may execute, and it cannot stop anything. A composed seat that says it defers an
 action will still run that action if the runtime hands it the tool, because prose
@@ -243,12 +243,12 @@ The bundle is the evidence for exactly one of those four rows. That is a smaller
 claim than a persona file usually makes, and it is one you can check.
 {% endsection %}
 
-{% section { id: "stack", extraClass: "project__chain", band: "penumbra", accent: "sage", label: "One boundary, three proofs", heading: "Constrain what an agent can do, and prove what it did." } %}
+{% section { id: "stack", extraClass: "project__chain", band: "penumbra", accent: "context", label: "One boundary, three proofs", heading: "Constrain what an agent can do, and prove what it did." } %}
 {% set here = "agent-compose" %}
 {% include "components/project-chain.njk" %}
 {% endsection %}
 
-{% section { id: "reference", band: "umbra", accent: "peri", label: "Repository and docs", heading: "Reference" } %}
+{% section { id: "reference", band: "umbra", accent: "reference", label: "Repository and docs", heading: "Reference" } %}
 <ul class="project__links">
   <li><a href="https://github.com/coilyco-flight-deck/agent-compose">Repository ↗</a></li>
   <li><a href="https://github.com/coilyco-flight-deck/agent-compose/blob/main/docs/FEATURES.md">docs/FEATURES.md ↗</a></li>

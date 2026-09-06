@@ -46,7 +46,7 @@ project:
               surface you own, never words addressed outward"</span></code></pre>
 ---
 
-{% section { id: "problem", band: "penumbra", accent: "coral",
+{% section { id: "problem", band: "penumbra", accent: "cost",
              label: "The problem, and what it costs to leave alone",
              heading: "A charter written as prose cannot fail a test." } %}
 An agent's role usually lives in a prompt file. What it does, what it may touch,
@@ -64,7 +64,7 @@ runs, still reports a pass rate, and has quietly stopped describing what ships.
 Nothing announces the gap, because both halves are healthy on their own.
 {% endsection %}
 
-{% section { id: "how-it-works", band: "lilac", accent: "mint",
+{% section { id: "how-it-works", band: "lilac", accent: "grant",
              label: "What it does about it",
              heading: "One file is the source, and the board is a consequence of it." } %}
 housecast reads roles, personalities, and boundaries from one YAML roster. It
@@ -84,7 +84,7 @@ challenge, and a human scores the run, because the thing being judged is whether
 a transcript honoured a sentence.
 {% endsection %}
 
-{% section { id: "roster", band: "umbra", accent: "mint",
+{% section { id: "roster", band: "umbra", accent: "grant",
              label: "What it looks like in use",
              heading: "Three keys, and the fourth thing is derived." } %}
 A roster carries `boundaries`, `personalities`, and `roles`, plus an invariant
@@ -103,7 +103,7 @@ reads a transcript against, which is why "labels and error text inside a surface
 you own" earns its place and "handles frontend copy" would not.
 {% endsection %}
 
-{% section { id: "not-a-framework", band: "lilac", accent: "amber",
+{% section { id: "not-a-framework", band: "lilac", accent: "refuse",
              label: "What it does not do",
              heading: "It composes context. It runs nothing." } %}
 housecast emits a bundle and stops. `acompose` is downstream of it, rendering
@@ -126,7 +126,7 @@ held byte-identical until that one is deleted.
     decision rather than a gap. Related writing is absent for the same reason it
     is absent on every project page: it has no promoted post to point at. -#}
 
-{% section { id: "reference", band: "umbra", accent: "peri",
+{% section { id: "reference", band: "umbra", accent: "reference",
              label: "Repository and docs",
              heading: "Reference" } %}
 <ul class="project__links">

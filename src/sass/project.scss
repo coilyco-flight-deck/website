@@ -23,16 +23,17 @@
 
   --ink: #e6e2f2;
   --bright: #{vars.$pure-white};
-  --quiet: #9aabc4;
+  --quiet: #aba5c4;
 
   // Accents carry register rather than position: mint grants, amber refuses,
   // coral is cost, sage is the wider system, periwinkle is reference. The
   // light bands re-declare them, because none of these is readable on lilac.
-  --mint: #{vars.$light-blue};
-  --amber: #{vars.$focus};
-  --coral: #{vars.$coral};
-  --sage: #93b7a4;
-  --peri: #a9aad0;
+  --grant: #{vars.$grant};
+  --refuse: #{vars.$refuse};
+  --cost: #{vars.$cost};
+  --context: #{vars.$context};
+  --reference: #{vars.$reference};
+  --wash: #{vars.$brand-purple};
 
   --edge: rgba(vars.$light-purple, 0.24);
   --edge-soft: rgba(vars.$light-purple, 0.14);
@@ -118,7 +119,7 @@ body:has(.project) {
 .project p code,
 .project li code,
 .project td code {
-  color: var(--mint);
+  color: var(--grant);
   font-size: 0.9em;
 }
 
@@ -129,7 +130,7 @@ body:has(.project) {
   background: var(--umbra);
 
   .label {
-    color: var(--mint);
+    color: var(--grant);
   }
 }
 
@@ -287,7 +288,7 @@ body:has(.project) {
   font-variant-numeric: tabular-nums;
 
   b {
-    color: var(--mint);
+    color: var(--grant);
     font-weight: 700;
   }
 }
@@ -305,8 +306,8 @@ body:has(.project) {
   margin: 1.4rem 0 0;
 
   a {
-    border-bottom: 1px solid var(--mint);
-    color: var(--mint);
+    border-bottom: 1px solid var(--grant);
+    color: var(--grant);
     font-size: 1.02rem;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -334,10 +335,10 @@ body:has(.project) {
   // A dark surface inside a light section, so it takes the dark-zone accent
   // values back. Without this the syntax colours inherit the ink-side mint
   // and amber, which are chosen for paper and are unreadable on the sink.
-  --mint: #{vars.$light-blue};
-  --amber: #{vars.$focus};
+  --grant: #{vars.$grant};
+  --refuse: #{vars.$refuse};
 
-  border-left: 2px solid var(--mint);
+  border-left: 2px solid var(--grant);
   border-radius: 0.2rem;
   background: var(--sink);
 
@@ -358,12 +359,12 @@ body:has(.project) {
   }
 
   .k {
-    color: var(--mint);
+    color: var(--grant);
     font-weight: 700;
   }
 
   .s {
-    color: var(--amber);
+    color: var(--refuse);
   }
 
   .c {
@@ -372,7 +373,7 @@ body:has(.project) {
 }
 
 .project__code--annotated .c {
-  color: var(--mint);
+  color: var(--grant);
   font-weight: 700;
 }
 
@@ -421,7 +422,7 @@ body:has(.project) {
   }
 
   li[data-state="granted"] {
-    color: var(--mint);
+    color: var(--grant);
     font-weight: 700;
     text-shadow: 0 0 1.4rem rgba(223, 240, 234, 0.55);
   }
@@ -449,7 +450,7 @@ body:has(.project) {
   font-size: 0.76rem;
 
   .g {
-    color: var(--mint);
+    color: var(--grant);
     font-weight: 700;
   }
 
@@ -522,12 +523,12 @@ body:has(.project) {
     }
 
     &[aria-current="true"] {
-      color: var(--mint);
-      border-left-color: var(--mint);
+      color: var(--grant);
+      border-left-color: var(--grant);
       font-weight: 700;
 
       &::before {
-        color: var(--mint);
+        color: var(--grant);
       }
     }
   }
@@ -537,7 +538,7 @@ body:has(.project) {
 // paints beneath the block background of every ancestor, which is why nothing
 // above these may paint and body carries the default ground instead.
 .project__body > section {
-  --sect: var(--mint);
+  --sect: var(--grant);
   --band: var(--penumbra);
 
   position: relative;
@@ -558,13 +559,15 @@ body:has(.project) {
     @media (max-width: 62rem) {
       inset: 0 -100vw;
     }
-    // The band carries its accent as a wash off the top edge, so the variety
-    // is hue rather than only value. Falls back to the flat ground where
-    // color-mix is unsupported.
+    // The band washes off the top edge in the brand hue, never in the
+    // section's register: an off-hue register may mark, but a large fill
+    // stays on 294. The register still names the section on the border and
+    // the label. Falls back to the flat ground where color-mix is
+    // unsupported.
     background: var(--band);
     background: linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--sect) 9%, var(--band)),
+      color-mix(in srgb, var(--wash) 9%, var(--band)),
       var(--band) 42%
     );
     border-top: 2px solid var(--sect);
@@ -595,24 +598,24 @@ body:has(.project) {
   --band: var(--umbra);
 }
 
-.project__body > section[data-accent="mint"] {
-  --sect: var(--mint);
+.project__body > section[data-accent="grant"] {
+  --sect: var(--grant);
 }
 
-.project__body > section[data-accent="amber"] {
-  --sect: var(--amber);
+.project__body > section[data-accent="refuse"] {
+  --sect: var(--refuse);
 }
 
-.project__body > section[data-accent="coral"] {
-  --sect: var(--coral);
+.project__body > section[data-accent="cost"] {
+  --sect: var(--cost);
 }
 
-.project__body > section[data-accent="sage"] {
-  --sect: var(--sage);
+.project__body > section[data-accent="context"] {
+  --sect: var(--context);
 }
 
-.project__body > section[data-accent="peri"] {
-  --sect: var(--peri);
+.project__body > section[data-accent="reference"] {
+  --sect: var(--reference);
 }
 
 // A light band inverts every token inside it, accents included. The site
@@ -625,11 +628,12 @@ body:has(.project) {
   --bright: #{vars.$ink};
   --quiet: #{vars.$mid-purple};
 
-  --mint: #1c6b5b;
-  --amber: #7d5410;
-  --coral: #a8482a;
-  --sage: #3d6b52;
-  --peri: #{vars.$mid-purple};
+  --grant: #{vars.$grant-on-light};
+  --refuse: #{vars.$refuse-on-light};
+  --cost: #{vars.$cost-on-light};
+  --context: #{vars.$context-on-light};
+  --reference: #{vars.$reference-on-light};
+  --wash: #{vars.$mid-purple};
 
   --edge: rgba(vars.$mid-purple, 0.28);
   --edge-soft: rgba(vars.$mid-purple, 0.16);
@@ -655,7 +659,7 @@ body:has(.project) {
   section:hover &,
   &:focus-visible {
     opacity: 1;
-    color: var(--mint);
+    color: var(--grant);
   }
 }
 
@@ -688,7 +692,7 @@ body:has(.project) {
   }
 
   dt {
-    color: var(--sect, var(--mint));
+    color: var(--sect, var(--grant));
     font-family: vars.$font-family-mono;
     font-size: 0.85rem;
     font-weight: 700;
@@ -712,9 +716,9 @@ body:has(.project) {
   place-items: center;
   width: 1.3rem;
   height: 1.3rem;
-  border: 1px solid var(--sect, var(--mint));
+  border: 1px solid var(--sect, var(--grant));
   border-radius: 50%;
-  color: var(--sect, var(--mint));
+  color: var(--sect, var(--grant));
   font-size: 0.68rem;
   font-variant-numeric: tabular-nums;
 }
@@ -780,9 +784,9 @@ body:has(.project) {
   gap: 0 1rem;
   margin: 1.6rem 0 0;
   padding: 1.1rem 1.3rem;
-  border-left: 2px solid var(--amber);
+  border-left: 2px solid var(--refuse);
   border-radius: 0.2rem;
-  background: rgba(vars.$focus, 0.14);
+  background: rgba(vars.$refuse, 0.14);
 
   p {
     max-width: 66ch;
@@ -800,7 +804,7 @@ body:has(.project) {
 }
 
 .project__note-label {
-  color: var(--amber);
+  color: var(--refuse);
   font-family: vars.$font-family-mono;
   font-size: 0.72rem;
   font-weight: 700;
@@ -896,7 +900,7 @@ body:has(.project) {
 }
 
 .project__state--live {
-  color: var(--sect, var(--mint));
+  color: var(--sect, var(--grant));
 }
 
 .project__chain-role {
@@ -917,14 +921,14 @@ body:has(.project) {
 
   a {
     border-bottom: 1px solid transparent;
-    color: var(--sect, var(--mint));
+    color: var(--sect, var(--grant));
     font-family: vars.$font-family-mono;
     font-size: 0.88rem;
     font-weight: 700;
     text-decoration: none;
 
     &:hover {
-      border-bottom-color: var(--sect, var(--mint));
+      border-bottom-color: var(--sect, var(--grant));
     }
   }
 }

@@ -1,8 +1,7 @@
 import { openSync, readSync, closeSync } from "node:fs"
 
 // Intrinsic dimensions straight from the file header, so markup cannot drift
-// from the asset it points at. Only the two formats the pages actually ship.
-// A dependency would be the obvious way; this site carries no runtime ones.
+// from the asset. Two formats only, and no dependency: the site ships none.
 
 const PNG_SIGNATURE = "89504e470d0a1a0a"
 // Start-of-frame markers carry the dimensions. C4, C8 and CC are huffman,

@@ -43,7 +43,7 @@ project:
     }</code></pre>
 ---
 
-{% section { id: "problem", band: "penumbra", accent: "coral",
+{% section { id: "problem", band: "penumbra", accent: "cost",
              label: "The problem, and what it costs to leave alone",
              heading: "Most teams cannot answer that question." } %}
 The answer is spread across a system prompt, a tool definition, an allowlist
@@ -58,7 +58,7 @@ question in a review, so the safe call is to give the agent less than it needs, 
 the automation quietly stays a demo.
 {% endsection %}
 
-{% section { id: "how-it-works", band: "lilac", accent: "mint",
+{% section { id: "how-it-works", band: "lilac", accent: "grant",
              label: "What it does about it",
              heading: "umbra sits between semi-trusted automation and the host system." } %}
 What you did not declare does not get through. The boundary lives in a KDL guardfile
@@ -80,7 +80,7 @@ A public exit-code taxonomy lets an orchestrator tell a policy refusal apart fro
 tool failure, which is the difference between retrying and stopping.
 {% endsection %}
 
-{% section { id: "guardfile", band: "umbra", accent: "mint",
+{% section { id: "guardfile", band: "umbra", accent: "grant",
              label: "What it looks like in use",
              heading: "The reviewable surface is four lines, not a codebase." } %}
 `commit` is reachable and `--no-verify` is not.
@@ -115,7 +115,7 @@ is unreachable, because grants are deny-by-default and an unknown node fails clo
 </dl>
 {% endsection %}
 
-{% section { id: "not-a-sandbox", band: "lilac", accent: "amber",
+{% section { id: "not-a-sandbox", band: "lilac", accent: "refuse",
              label: "What it does not do",
              heading: "umbra is not a sandbox." } %}
 {% note %}
@@ -151,14 +151,14 @@ nothing. The policy is the thing you write, not the thing you install.
     in the cluster is promoted. See coilysiren/website#128 for why an
     unpromoted post is not a linkable target. -#}
 
-{% section { id: "stack", extraClass: "project__chain", band: "penumbra", accent: "sage",
+{% section { id: "stack", extraClass: "project__chain", band: "penumbra", accent: "context",
              label: "One boundary, three proofs",
              heading: "Constrain what an agent can do, and prove what it did." } %}
 {% set here = "umbra" %}
 {% include "components/project-chain.njk" %}
 {% endsection %}
 
-{% section { id: "reference", band: "umbra", accent: "peri",
+{% section { id: "reference", band: "umbra", accent: "reference",
              label: "Repository and docs",
              heading: "Reference" } %}
 <ul class="project__links">

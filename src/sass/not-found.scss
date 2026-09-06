@@ -69,7 +69,7 @@ $content-width: 1180px;
     z-index: -1;
     inset: 4% -10% -10% 10%;
     content: "";
-    background: vars.$coral;
+    background: vars.$cap-2;
     border-radius: 55% 45% 62% 38%;
     opacity: 0.88;
     transform: rotate(7deg);
@@ -188,18 +188,18 @@ $content-width: 1180px;
   }
 
   li:nth-child(2) a {
-    background: #273b38;
+    background: vars.$tile-2;
 
     &:hover {
-      background: #35504c;
+      background: vars.$tile-2-hover;
     }
   }
 
   li:nth-child(3) a {
-    background: #4b302f;
+    background: vars.$tile-3;
 
     &:hover {
-      background: #63403e;
+      background: vars.$tile-3-hover;
     }
   }
 

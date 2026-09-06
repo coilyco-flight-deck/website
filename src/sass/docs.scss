@@ -19,11 +19,11 @@
 
   --ink: #e6e2f2;
   --bright: #{vars.$pure-white};
-  --quiet: #9aabc4;
+  --quiet: #aba5c4;
 
-  --mint: #{vars.$light-blue};
-  --amber: #{vars.$focus};
-  --peri: #a9aad0;
+  --grant: #{vars.$light-blue};
+  --refuse: #{vars.$refuse};
+  --reference: #a9aad0;
 
   --edge: rgba(vars.$light-purple, 0.24);
   --edge-soft: rgba(vars.$light-purple, 0.14);
@@ -50,7 +50,7 @@ body:has(.docs) {
     display: inline-block;
     padding: 0.6rem 1rem;
     background: var(--sink);
-    color: var(--mint);
+    color: var(--grant);
   }
 }
 
@@ -91,12 +91,12 @@ body:has(.docs) {
     text-decoration: none;
 
     &:hover {
-      color: var(--mint);
+      color: var(--grant);
     }
   }
 
   li:first-child a {
-    color: var(--mint);
+    color: var(--grant);
     font-weight: 700;
   }
 
@@ -161,8 +161,8 @@ body:has(.docs) {
     }
 
     &[aria-current="page"] {
-      border-left-color: var(--mint);
-      color: var(--mint);
+      border-left-color: var(--grant);
+      color: var(--grant);
       font-weight: 700;
     }
   }
@@ -233,7 +233,7 @@ body:has(.docs) {
     white-space: nowrap;
 
     &:hover {
-      color: var(--mint);
+      color: var(--grant);
     }
   }
 }
@@ -293,12 +293,12 @@ body:has(.docs) {
   }
 
   a {
-    color: var(--mint);
+    color: var(--grant);
     text-decoration-color: var(--edge);
     text-underline-offset: 0.2em;
 
     &:hover {
-      text-decoration-color: var(--mint);
+      text-decoration-color: var(--grant);
     }
   }
 
@@ -310,7 +310,7 @@ body:has(.docs) {
     padding: 0.1em 0.34em;
     border-radius: 0.2rem;
     background: rgba(vars.$light-purple, 0.14);
-    color: var(--mint);
+    color: var(--grant);
     font-family: vars.$font-family-mono;
     font-size: 0.88em;
   }
@@ -320,7 +320,7 @@ body:has(.docs) {
   pre:not(.warning-message) {
     margin: 1.5rem 0 0;
     padding: clamp(0.9rem, 2.5vw, 1.3rem);
-    border-left: 2px solid var(--mint);
+    border-left: 2px solid var(--grant);
     border-radius: 0.2rem;
     background: var(--sink);
     color: #c3bcd8;
@@ -339,7 +339,7 @@ body:has(.docs) {
   blockquote {
     margin: 1.5rem 0 0;
     padding-left: 1.1rem;
-    border-left: 2px solid var(--amber);
+    border-left: 2px solid var(--refuse);
     color: var(--quiet);
   }
 
@@ -413,8 +413,8 @@ body:has(.docs) {
     }
 
     &[aria-current="true"] {
-      border-left-color: var(--mint);
-      color: var(--mint);
+      border-left-color: var(--grant);
+      color: var(--grant);
     }
   }
 }
@@ -451,7 +451,7 @@ body:has(.docs) {
   text-decoration: none;
 
   &:hover {
-    border-color: var(--mint);
+    border-color: var(--grant);
   }
 }
 
@@ -500,12 +500,12 @@ body:has(.docs) {
   font-size: 1.08rem;
 
   a {
-    color: var(--mint);
+    color: var(--grant);
     text-decoration-color: var(--edge);
     text-underline-offset: 0.2em;
 
     &:hover {
-      text-decoration-color: var(--mint);
+      text-decoration-color: var(--grant);
     }
   }
 }
@@ -546,7 +546,7 @@ body:has(.docs) {
     text-decoration: none;
 
     &:hover {
-      color: var(--mint);
+      color: var(--grant);
     }
   }
 

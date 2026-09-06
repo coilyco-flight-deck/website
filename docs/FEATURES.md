@@ -19,6 +19,12 @@ feature is added, removed, or reshaped, so the diff shows scope drift.
   `loading="lazy"` actually defer. `/about/` went from 35MB to about 1MB, and
   `cypress/e2e/weight.cy.ts` holds a per-route transfer ceiling that only ever
   moves down.
+- **Brand palette** - every structural colour sits on one hue in OKLCH, and
+  leaves it only where the meaning is locked to a hue: a refusal, a cost, a
+  grant. Variety comes from lightness rather than hue, which is what the
+  section caps and the `/404` recovery tiles now use. Derivation, the audit
+  that preceded it, and the focus-ring contrast defect it closed:
+  [brand](brand.md).
 - **Pages** - route-by-route inventory in [site pages](pages.md).
 - **Project pages** - one page per headline project at `/projects/<name>/`,
   carrying its own visual system rather than the site's page chrome because

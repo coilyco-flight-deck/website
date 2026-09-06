@@ -37,8 +37,22 @@ Anything a browser is not required to observe does not get a browser.
   34MB, now `coilysiren/website#129`.
 - **Layout invariants** - [`cypress/e2e/basic.cy.ts`](../cypress/e2e/basic.cy.ts)
   covers only what needs real layout: no sideways overflow at 390px, the About
-  portrait sitting beside its copy at 1280px, and no third-party origin at
-  all.
+  portrait sitting beside its copy at 1280px, no third-party origin at all, and
+  media sized by the stylesheet rather than by its reserved box.
+
+## Two numbers worth keeping
+
+**Why `/about/` is the one ceiling that went up.** The width and height
+attributes that reserve an image's box also map to the `height` property, which
+outranks `aspect-ratio`, so without the reset in `layout.scss` a box collapses
+onto the file's own pixel height. A positional test misses that entirely,
+because the element is still in the right place and only the wrong shape. The
+1200K ceiling was measured while the portrait drew at its own pixel height,
+which made the page 770px taller than it should have been and pushed three
+home-slide images past the lazy threshold. Correcting the portrait pulled them
+back in: 1027K before the fix, 1714K after, and the 687K between them is those
+three files. They are already crisp 2x at 2560, so resizing wins nothing back
+but softness.
 
 Copy is deliberately not pinned. Asserting exact wording turns every copy edit
 into a two-file edit and protects nothing, because changed words were changed

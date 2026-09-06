@@ -62,11 +62,8 @@ describe("Layout invariants", () => {
   })
 
   it("sizes media by the stylesheet, not by the reserved box", () => {
-    // The width and height attributes that reserve an image's box also map to
-    // the `height` property, which outranks `aspect-ratio`. Without the reset
-    // in layout.scss the box collapses onto the file's own pixel height and
-    // `object-fit: cover` crops hard. Positional tests miss it, because the
-    // element is still in the right place - just the wrong shape.
+    // Reserved boxes outrank `aspect-ratio` and a positional test cannot see
+    // the result. What breaks without the layout.scss reset: docs/verification.md.
     cy.viewport(1280, 900)
     ;[...ROUTES, "/definitely-not-here/"].forEach((url) => {
       cy.visit(url, { failOnStatusCode: false })
