@@ -6,7 +6,7 @@ pagination:
   alias: variant
 permalink: "{% if variant == 'vanity' %}vanity/housecast/index.html{% else %}projects/housecast/index.html{% endif %}"
 title: housecast, a YAML driven roster framework for agent context | Kai Ase Siren
-description: You changed what a role is allowed to do. The evaluation that checked it didn't notice. housecast composes agent context from one YAML roster and derives the evaluation board from the same file.
+description: You changed what a role is allowed to do. The evaluation that checked it did not notice. housecast composes agent context from one YAML roster and derives the evaluation board from the same file.
 canonical: /projects/housecast/
 robots: follow, index
 softwareSchema:
@@ -20,7 +20,7 @@ project:
   hasMark: false
   eyebrow: Roster // the context an agent loads
   claim: A YAML driven roster framework for agent context
-  hook: You changed what a role is allowed to do. The evaluation that checked it didn't notice.
+  hook: You changed what a role is allowed to do. The evaluation that checked it did not notice.
   caption: The frontend role never declares what it owns. The boundary's own owner line is what makes this a deferral, and the scope string is what a grader reads a transcript against.
   meta:
     - Preview
