@@ -153,7 +153,7 @@ nothing. The policy is the thing you write, not the thing you install.
 
 {% section { id: "stack", extraClass: "project__chain", band: "penumbra", accent: "context",
              label: "One boundary, three proofs",
-             heading: "Constrain what an agent can do, and prove what it did." } %}
+             heading: "The whole reviewable surface is one file a person can read." } %}
 {% set here = "umbra" %}
 {% include "components/project-chain.njk" %}
 {% endsection %}
