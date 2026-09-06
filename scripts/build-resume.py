@@ -480,7 +480,7 @@ def build_header(styles, resume: Resume, avatar_png: Path,
     contact_line2 = "&nbsp;·&nbsp;".join(link_pieces)
 
     tagline = (
-        "Staff platform engineer - governed AI systems, developer "
+        "Senior platform engineer - governed AI systems, developer "
         "infrastructure, and production platforms."
     )
 
