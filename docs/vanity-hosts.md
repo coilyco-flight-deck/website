@@ -27,11 +27,34 @@ because Netlify takes the first match. Shared assets pass through first,
 to `www.coilysiren.me`, so an in-page link like `/projects/umbra/docs/` leaves
 for the real site instead of 404ing on a host that has no such page.
 
-One assumption is untested until a host is live: Netlify redirects non-primary
-domains to the primary by default, and `force = true` is documented as
-overriding file shadowing rather than that redirect. If the alias gets 301'd
-before the rewrite runs, the vanity name never survives and none of this
-matters. Proving it is one throwaway rule and a look at the address bar.
+That assumption is no longer untested. The worry was that Netlify redirects
+non-primary domains to the primary by default, `force = true` being documented
+as overriding file shadowing rather than that redirect, so an alias 301'd before
+the rewrite runs would never keep its vanity name. **It keeps it.** Measured
+2026-09-06 against all three live hosts:
+
+```
+umbra.coilyco.ai      200, 0 redirects
+acompose.coilyco.ai   200, 0 redirects
+beaver.coilyco.ai     200, 0 redirects
+```
+
+Each serves the twin under its own hostname, carrying
+`<meta name="robots" content="follow, index">` and a canonical to its
+`https://www.coilysiren.me/projects/<slug>/` page. Both renamed hosts reach
+their short form in exactly one hop.
+
+`index` alongside a cross-domain canonical is the pairing this wants, and
+`noindex` would have been the wrong reach: the two directives contradict, and
+resolving that in favour of `noindex` can carry it to the canonical target.
+
+**What stays unmeasured is the other half.** A cross-domain canonical is a hint
+rather than a directive, and there is no Search Console property for
+`coilyco.ai`, so nothing reports whether Google honours these. That it can
+decline one is not hypothetical here: `website.coilysiren.me` carries a correct
+canonical to `www` and Google indexes the alternate host anyway
+(`teable:coilyco-flight-deck/website#7071`). Verification is tracked at
+`teable:coilyco-flight-deck/infrastructure#7073`.
 
 ## Renamed hosts
 
