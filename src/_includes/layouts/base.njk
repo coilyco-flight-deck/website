@@ -12,6 +12,14 @@
     {%- if markSlug and markSlug in projectMarks %}
     <link rel="icon" href="/images/marks/{{ markSlug }}.png" type="image/png">
     {%- else %}
+    {#- The SVG is listed first so a browser that reads it never reaches the
+        rasters. It carries its own prefers-color-scheme rule and repaints
+        itself; Safari takes the light rule and ignores the query, which is
+        what the PNG and ICO are here for. The mark carries no brand colour
+        yet, by decision: coilyco-bridge/agentic-os-xxx#7074. -#}
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="/images/favicon-16.png" type="image/png" sizes="16x16">
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     {%- endif %}
     <link rel="stylesheet" href="/styles/prism-tomorrow.css">
