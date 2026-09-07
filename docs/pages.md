@@ -24,7 +24,12 @@ under [src/pages/](../src/pages/) so the resume keeps its canonical source.
   benchmark and offers the detail in conversation rather than explaining any
   departure, which `lore-self-capacity-and-tenure` keeps off a public surface.
 - **`writing.njk`** - date-ordered listing of the promoted posts, and
-  indexable. It is still unlinked from the homepage, which issue #98 owns.
+  indexable. **It is deliberately unlinked from the homepage nav, and that is
+  settled rather than pending.** Search engines reach it through the sitemap
+  and a reader reaches it by knowing the URL, which is the intent. Do not add
+  a nav link, and do not file the absence as a routing defect: it has been
+  rediscovered as one more than once, most recently against Search Console
+  data (`teable:coilyco-flight-deck/website#7070`, closed as superseded).
 - **`coilysiren-personal-gmail-privacy.md`** - privacy and contact notice for the `coilysiren-personal-gmail` OAuth client.
 - **`404.njk`** - a fully designed not-found recovery page that preserves the
   real 404 response while carrying the homepage's visual system into clear
