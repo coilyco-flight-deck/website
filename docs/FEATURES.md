@@ -35,10 +35,11 @@ feature is added, removed, or reshaped, so the diff shows scope drift.
   `src/data/stack.js`. See [project pages](project-pages.md).
 - **Vanity project hosts** - each project page also renders under
   `<slug>.coilyco.ai` with project chrome instead of the site's, proxied by a
-  Netlify rewrite so the vanity name stays in the address bar. The twin keeps
-  the canonical of the page it mirrors, so the hosts do not split search
-  authority and the sitemap names each URL once. See
-  [vanity hosts](vanity-hosts.md).
+  Netlify rewrite so the vanity name stays in the address bar. **That host is
+  canonical for the project**: its page, its docs and its guides are canonical
+  at the short path there, the `www` copies point at them, and the sitemap and
+  `llms.txt` name them. Every claimed path is served 200 rather than redirected,
+  asserted against `netlify.toml`. See [vanity hosts](vanity-hosts.md).
 - **Project docs mount** - a project's own `docs/` mounted verbatim under its
   page, with the section tree, reading order, and prev and next all derived
   from one manifest, re-vendored daily from the source repository by

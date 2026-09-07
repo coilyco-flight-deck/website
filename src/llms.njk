@@ -17,27 +17,27 @@ Use the pages below as the canonical public profile. Other routes are retained o
 
 ## Projects
 
-- [umbra](https://www.coilysiren.me/projects/umbra/): A config driven occlusion framework. Declares what an agent may execute, validates argv before execve, and records every call.
-- [mcp-beaver](https://www.coilysiren.me/projects/mcp-beaver/): A MCP server generator. Renders a umbra guardfile into a guarded MCP server, where an operation nobody declared has no tool and no endpoint.
-- [agent-compose](https://www.coilysiren.me/projects/agent-compose/): An eval driven composer for agent roles and personas. Compiles one immutable bundle of plain files that carries context and no authority, and derives its test board from the roster.
+- [umbra]({{ "/projects/umbra/" | canonicalUrl }}): A config driven occlusion framework. Declares what an agent may execute, validates argv before execve, and records every call.
+- [mcp-beaver]({{ "/projects/mcp-beaver/" | canonicalUrl }}): A MCP server generator. Renders a umbra guardfile into a guarded MCP server, where an operation nobody declared has no tool and no endpoint.
+- [agent-compose]({{ "/projects/agent-compose/" | canonicalUrl }}): An eval driven composer for agent roles and personas. Compiles one immutable bundle of plain files that carries context and no authority, and derives its test board from the roster.
 
 {% for mount in docsMounts | dictsort %}{% set mount = mount[1] %}
 ## {{ mount.project }} docs
 
-{{ mount.project }}'s own documentation, mounted verbatim from its repository and ordered by a manifest rather than alphabetically. The [front door]({{ site.url }}{{ mount.root }}) lists every shelf.
+{{ mount.project }}'s own documentation, mounted verbatim from its repository and ordered by a manifest rather than alphabetically. The [front door]({{ mount.root | canonicalUrl }}) lists every shelf.
 {% for shelf in mount.shelves %}
 ### {{ shelf.title }}
 {% for page in shelf.pages %}
-- [{{ page.title }}]({{ site.url }}{{ mount.root }}{{ page.slug }}/): {{ page.blurb }}
+- [{{ page.title }}]({{ (mount.root + page.slug + "/") | canonicalUrl }}): {{ page.blurb }}
 {%- endfor %}
 {% endfor %}{% if mount.guides %}
 ## {{ mount.project }} guides
 
-End-to-end walkthroughs, separate from the reference above and scarce on purpose. The [front door]({{ site.url }}{{ mount.guides.root }}) lists every shelf.
+End-to-end walkthroughs, separate from the reference above and scarce on purpose. The [front door]({{ mount.guides.root | canonicalUrl }}) lists every shelf.
 {% for shelf in mount.guides.shelves %}
 ### {{ shelf.title }}
 {% for page in shelf.pages %}
-- [{{ page.title }}]({{ site.url }}{{ mount.guides.root }}{{ page.slug }}/): {{ page.blurb }}
+- [{{ page.title }}]({{ (mount.guides.root + page.slug + "/") | canonicalUrl }}): {{ page.blurb }}
 {%- endfor %}
 {% endfor %}{% endif %}{% endfor %}
 ## Writing

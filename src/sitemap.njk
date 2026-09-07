@@ -6,10 +6,10 @@ eleventyExcludeFromCollections: true
 {%- for item in collections.all -%}
   {#- The crawlable set is whatever each page declares about itself, so a
       retired route stays out and a newly indexed one appears without an edit. -#}
-  {#- A vanity twin carries the canonical of the page it mirrors, so listing it
-      would name the same URL twice. -#}
+  {#- A project is canonical on its vanity host, and its twin carries the same
+      canonical, so listing the twin would name that URL twice. -#}
   {%- if item.data.canonical and item.data.robots and ("noindex" not in item.data.robots) and item.data.variant != "vanity" -%}
-    {%- set locations = (locations.push(site.url + item.data.canonical), locations) -%}
+    {%- set locations = (locations.push(item.data.canonical | canonicalUrl), locations) -%}
   {%- endif -%}
 {%- endfor -%}
 <?xml version="1.0" encoding="UTF-8"?>

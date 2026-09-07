@@ -31,8 +31,9 @@
     <meta property="og:description" content="{{ description or site.description }}">
     <meta property="og:type" content="{% if isArticle %}article{% else %}website{% endif %}">
     {% if canonical %}
-      <link rel="canonical" href="{{ site.url }}{{ canonical }}">
-      <meta property="og:url" content="{{ site.url }}{{ canonical }}">
+      {%- set canonUrl = canonical | canonicalUrl %}
+      <link rel="canonical" href="{{ canonUrl }}">
+      <meta property="og:url" content="{{ canonUrl }}">
     {% endif %}
     {% if isArticle and date %}
       <meta property="article:published_time" content="{{ date | isoDate }}">
@@ -53,7 +54,7 @@
           "@type": "BlogPosting",
           "headline": {{ title | dump | safe }},
           "datePublished": {{ date | isoDay | dump | safe }},
-          "url": {{ (site.url + canonical) | dump | safe }},
+          "url": {{ (canonical | canonicalUrl) | dump | safe }},
           "author": {
             "@type": "Person",
             "name": {{ site.author | dump | safe }},
@@ -69,7 +70,7 @@
           "@type": "SoftwareSourceCode",
           "name": {{ softwareSchema.name | dump | safe }},
           "description": {{ softwareSchema.claim | dump | safe }},
-          "url": {{ (site.url + canonical) | dump | safe }},
+          "url": {{ (canonical | canonicalUrl) | dump | safe }},
           "codeRepository": {{ softwareSchema.repo | dump | safe }},
           "license": {{ softwareSchema.license | dump | safe }},
           "author": {
@@ -87,7 +88,7 @@
           "@type": "TechArticle",
           "headline": {{ docsSchema.headline | dump | safe }},
           "description": {{ description | dump | safe }},
-          "url": {{ (site.url + canonical) | dump | safe }},
+          "url": {{ (canonical | canonicalUrl) | dump | safe }},
           "articleSection": {{ docsSchema.shelf | dump | safe }},
           "isPartOf": {
             "@type": "SoftwareSourceCode",

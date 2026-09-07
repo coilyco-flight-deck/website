@@ -75,6 +75,18 @@
   force = true
 
 [[redirects]]
+  from = "https://umbra.coilyco.ai/docs/*"
+  to = "/projects/umbra/docs/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://umbra.coilyco.ai/docs-rail.js"
+  to = "/docs-rail.js"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "https://umbra.coilyco.ai/"
   to = "/vanity/umbra/index.html"
   status = 200
@@ -107,6 +119,18 @@
 [[redirects]]
   from = "https://acompose.coilyco.ai/project-toc.js"
   to = "/project-toc.js"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://acompose.coilyco.ai/docs/*"
+  to = "/projects/agent-compose/docs/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://acompose.coilyco.ai/docs-rail.js"
+  to = "/docs-rail.js"
   status = 200
   force = true
 
@@ -147,6 +171,18 @@
   force = true
 
 [[redirects]]
+  from = "https://beaver.coilyco.ai/docs/*"
+  to = "/projects/mcp-beaver/docs/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://beaver.coilyco.ai/docs-rail.js"
+  to = "/docs-rail.js"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "https://beaver.coilyco.ai/"
   to = "/vanity/mcp-beaver/index.html"
   status = 200
@@ -179,6 +215,18 @@
 [[redirects]]
   from = "https://housecast.coilyco.ai/project-toc.js"
   to = "/project-toc.js"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://housecast.coilyco.ai/docs/*"
+  to = "/projects/housecast/docs/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://housecast.coilyco.ai/docs-rail.js"
+  to = "/docs-rail.js"
   status = 200
   force = true
 

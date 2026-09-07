@@ -5,6 +5,8 @@ import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight"
 import * as sass from "sass"
 import { docsMountList, docsMounts } from "./src/data/docs-mount-loader.js"
 import { rewriteMountedLinks } from "./src/data/docs-mount-links.js"
+import { canonicalFor } from "./src/data/vanity-hosts.js"
+import site from "./src/_data/site.js"
 import { imageSize } from "./src/data/image-size.js"
 import { projectCard } from "./src/data/project-cards.js"
 
@@ -119,6 +121,12 @@ export default function configureEleventy(eleventyConfig) {
       }
     )
   }
+
+  // A project is canonical on its own vanity host, so the tag, og:url, the
+  // JSON-LD and the sitemap all derive from here. docs/vanity-hosts.md.
+  eleventyConfig.addFilter("canonicalUrl", (route) =>
+    canonicalFor(route, site.url)
+  )
 
   eleventyConfig.addWatchTarget("src/sass/")
   eleventyConfig.on("eleventy.before", compileStyles)

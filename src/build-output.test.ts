@@ -2,6 +2,7 @@ import { readdirSync, readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import { ROUTES } from "../cypress/routes"
 import { DOCS_ROUTES, GUIDES_ROUTES } from "./data/docs-mount-routes.js"
+import { canonicalFor } from "./data/vanity-hosts.js"
 
 // These assert what Eleventy emitted, not how it renders, so they read dist/
 // rather than driving a browser. `pnpm run test:quick` builds first.
@@ -38,7 +39,9 @@ const INDEXED = [
 // The apex 301s here, so a canonical URL naming the apex would resolve
 // through a redirect. One host, everywhere.
 const HOST = "https://www.coilysiren.me"
-const INDEXED_URLS = INDEXED.map((route) => `${HOST}${route}`)
+// A project is canonical on its own vanity host, so the sitemap names that URL
+// rather than the www copy of the same page. docs/vanity-hosts.md.
+const INDEXED_URLS = INDEXED.map((route) => canonicalFor(route, HOST)).sort()
 
 const read = (path: string) => readFileSync(`dist/${path}`, "utf8")
 // JPEG carries its size in the SOF segment, not in the file header, so the
@@ -114,12 +117,13 @@ describe("build output", () => {
   })
 
   it("points every canonical URL at the host that answers", () => {
+    // A project is canonical on its own vanity host and everything else on the
+    // main site, so the expectation is derived rather than assumed to be HOST.
     CANONICAL_ROUTES.forEach((route) => {
       const html = page(route)
-      expect(html).toContain(`<link rel="canonical" href="${HOST}${route}">`)
-      expect(html).toContain(
-        `<meta property="og:url" content="${HOST}${route}">`
-      )
+      const url = canonicalFor(route, HOST)
+      expect(html).toContain(`<link rel="canonical" href="${url}">`)
+      expect(html).toContain(`<meta property="og:url" content="${url}">`)
     })
     // The bare apex never appears as a host. Subdomains of it are fine.
     ;["sitemap.xml", "robots.txt", "llms.txt", "index.html"].forEach((path) => {
