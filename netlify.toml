@@ -1,4 +1,10 @@
 # docs: https://docs.netlify.com/routing/redirects
+#
+# Netlify builds production from the GitHub `release` branch, not `main`. A
+# controller fast-forwards release to main once a day at 12:00 UTC, so
+# production lags main by up to a day BY DESIGN and each deploy costs credits.
+# A change merged here is not live until that runs. Editing this file and then
+# finding production unchanged is expected, not a fault: docs/deploy.md.
 
 [build]
   command = "pnpm build"

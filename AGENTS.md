@@ -31,6 +31,12 @@ Netlify or Kubernetes rollout.
 - **Site deploy verification** is out of scope here. Netlify and the deploy
   repository own their respective rollout health. This repository proves the
   Eleventy output and staging image contract before the push.
+- **Production is not `main`.** Netlify builds the GitHub `release` branch,
+  fast-forwarded from `main` once a day at 12:00 UTC, so a merge is not live
+  for up to a day and that lag is deliberate cost control rather than a stall.
+  Two seats once spent an hour treating it as an incident. Before filing one,
+  read [docs/deploy.md](docs/deploy.md); the early-publish verb lives in
+  infrastructure.
 
 ## Commands
 
