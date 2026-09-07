@@ -1,15 +1,9 @@
-// Rewriting the relative markdown links inside a mounted page. Lifted out of
-// eleventy.config.js so the guides case can be tested directly: a wrong answer
-// here emits a working link to the wrong place rather than an error, and
-// nothing downstream notices. Contract: docs/project-docs-render.md.
+// Relative markdown links inside a mounted page. Why this is a module with a
+// test rather than a closure: docs/project-docs-render.md.
 
 const LINK = /href="(?!https?:)([^"#?]+)\.md(#[^"]*)?"/g
 
-/**
- * Resolve a relative target the way the file that wrote it meant, against the
- * directory that file lives in. `check_dead_links.py` resolves the same way,
- * which is why a guide reaches reference as `../docs/<name>.md`.
- */
+/** Resolve a target against the directory that wrote it, as the validator does. */
 export const inRepo = (fromDir, target) =>
   new URL(target, `file:///${fromDir}/`).pathname.replace(/^\//, "")
 
@@ -25,12 +19,7 @@ export const treesOf = (mount) => ({
     : null,
 })
 
-/**
- * @param {string} content rendered HTML for one mounted page
- * @param {import("./docs-mount-loader.js").DocsMount} mount
- * @param {"docs"|"guides"} kind which tree the page being rendered sits in
- * @returns {string}
- */
+/** Rewrite one mounted page's links; `kind` is the tree that page sits in. */
 export const rewriteMountedLinks = (content, mount, kind) => {
   const trees = treesOf(mount)
   const here = trees[kind]
@@ -41,8 +30,7 @@ export const rewriteMountedLinks = (content, mount, kind) => {
     const cut = path.lastIndexOf("/")
     const dir = cut === -1 ? "" : path.slice(0, cut)
     const slug = path.slice(cut + 1).toLowerCase()
-    // Matched on the directory the link resolves into, not on the filename
-    // alone: two trees can hold the same slug, and only one of them is meant.
+    // On the resolved directory, not the filename: two trees can share a slug.
     for (const tree of Object.values(trees)) {
       if (tree && tree.dir === dir && tree.slugs.has(slug)) {
         return `href="${tree.root}${slug}/${anchor}"`

@@ -29,7 +29,11 @@ layout: layouts/base.njk
 
     <nav class="docs__nav" aria-label="{{ mountLabel }}">
       <a class="docs__brand" href="{{ mountRoot }}">
+        {#- projectMarks reads the drawn set off disk, so a project whose mark
+            is not drawn yet gets no <img> rather than a broken one. -#}
+        {%- if project in projectMarks %}
         <img src="/images/marks/{{ project }}.png" alt="" width="220" height="220" decoding="async">
+        {%- endif %}
         <span>
           <b>{{ project }}</b>
           <span class="docs__brand-sub">{{ mountKind }}</span>

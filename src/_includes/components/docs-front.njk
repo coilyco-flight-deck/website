@@ -13,7 +13,9 @@
 
   <div class="docs__col docs__front">
     <div class="docs__brand">
+      {%- if mount.project in projectMarks %}
       <img src="/images/marks/{{ mount.project }}.png" alt="" width="220" height="220" decoding="async">
+      {%- endif %}
       <span>
         <b>{{ mount.project }}</b>
         <span class="docs__brand-sub">docs</span>

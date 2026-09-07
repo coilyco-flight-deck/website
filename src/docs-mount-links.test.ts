@@ -1,11 +1,8 @@
 import { describe, expect, it } from "vitest"
 import { inRepo, rewriteMountedLinks } from "./data/docs-mount-links.js"
 
-// The failure this file exists for is silent. A guide reaches its project's
-// reference as ../docs/<name>.md, because check_dead_links.py resolves a
-// relative link against the file's own directory. Get the hop wrong and the
-// link still works, it just leaves the site for the source repo, so nothing
-// downstream reports it. teable:coilyco-flight-deck/website#7079.
+// The failure here is silent: a wrong hop still emits a working link, just to
+// the wrong place. teable:coilyco-flight-deck/website#7079.
 type Tree = { dir: string; root: string; slugs: Set<string> }
 type Mount = {
   repo: string
