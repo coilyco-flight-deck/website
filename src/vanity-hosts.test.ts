@@ -2,10 +2,12 @@ import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import { VANITY_HOSTS, canonicalFor } from "./data/vanity-hosts.js"
 
-// The map decides what a canonical tag claims; netlify.toml decides what that
-// URL actually serves. A canonical pointing at a 301 is worse than none, so
-// these two are asserted against each other rather than trusted to agree.
+// The map claims a canonical; netlify.toml decides what that URL serves. Why
+// they are asserted against each other: docs/vanity-hosts.md.
 const toml = readFileSync("netlify.toml", "utf8")
+// Assembled, not written inline: the comment scanner reads a literal /* as a
+// block-comment opener and swallows the rest of the file.
+const ANY = "/" + "*"
 const rule = (from: string, to: string) =>
   new RegExp(
     `from = "${from.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"\\s*\\n\\s*to = "${to.replace(
@@ -46,22 +48,32 @@ describe("vanity hosts are canonical for their projects", () => {
         rule(`${host}/`, `/vanity/${slug}/index.html`)
       )
       // the docs short path the canonical tags now point at
-      expect(toml, `${host}/docs/* must serve ${slug} docs`).toMatch(
-        rule(`${host}/docs/*`, `/projects/${slug}/docs/:splat`)
+      expect(toml, `${host}/docs glob must serve ${slug} docs`).toMatch(
+        rule(`${host}/docs${ANY}`, `/projects/${slug}/docs/:splat`)
       )
       // the rail script the docs pages request, which is not under /styles/
       expect(toml, `${host} must pass /docs-rail.js through`).toMatch(
         rule(`${host}/docs-rail.js`, "/docs-rail.js")
+      )
+      // Every in-page link is a /projects/<slug>/ path, so without this the
+      // canonical page walks its own reader off the canonical host.
+      expect(
+        toml,
+        `${host} must serve its own /projects/${slug}/ paths`
+      ).toMatch(
+        rule(`${host}/projects/${slug}${ANY}`, `/projects/${slug}/:splat`)
       )
     }
   })
 
   it("keeps each host's catch-all last, since Netlify takes the first match", () => {
     for (const host of Object.values(VANITY_HOSTS)) {
-      const froms = [...toml.matchAll(/from = "(https:\/\/[^"]+)"/g)]
+      const hostRules = [...toml.matchAll(/from = "(https:[^"]+)"/g)]
         .map((m) => m[1] ?? "")
         .filter((f) => f.startsWith(`${host}/`))
-      expect(froms.at(-1), `${host} catch-all is not last`).toBe(`${host}/*`)
+      expect(hostRules.at(-1), `${host} catch-all is not last`).toBe(
+        `${host}${ANY}`
+      )
     }
   })
 })

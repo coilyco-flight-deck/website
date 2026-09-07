@@ -9,13 +9,7 @@ export const VANITY_HOSTS = {
   umbra: "https://umbra.coilyco.ai",
 }
 
-/**
- * The canonical absolute URL for a built route.
- *
- * A project's own pages are canonical on its vanity host at the short path, so
- * `/projects/umbra/docs/x/` is `https://umbra.coilyco.ai/docs/x/`. Everything
- * else is canonical on the main site.
- */
+/** The canonical absolute URL for a built route. docs/vanity-hosts.md. */
 export const canonicalFor = (route, siteUrl) => {
   const hit = String(route).match(/^\/projects\/([^/]+)\/(.*)$/)
   const host = hit && VANITY_HOSTS[hit[1]]

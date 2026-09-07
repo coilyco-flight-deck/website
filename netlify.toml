@@ -87,6 +87,12 @@
   force = true
 
 [[redirects]]
+  from = "https://umbra.coilyco.ai/projects/umbra/*"
+  to = "/projects/umbra/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "https://umbra.coilyco.ai/"
   to = "/vanity/umbra/index.html"
   status = 200
@@ -131,6 +137,12 @@
 [[redirects]]
   from = "https://acompose.coilyco.ai/docs-rail.js"
   to = "/docs-rail.js"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://acompose.coilyco.ai/projects/agent-compose/*"
+  to = "/projects/agent-compose/:splat"
   status = 200
   force = true
 
@@ -183,6 +195,12 @@
   force = true
 
 [[redirects]]
+  from = "https://beaver.coilyco.ai/projects/mcp-beaver/*"
+  to = "/projects/mcp-beaver/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "https://beaver.coilyco.ai/"
   to = "/vanity/mcp-beaver/index.html"
   status = 200
@@ -227,6 +245,12 @@
 [[redirects]]
   from = "https://housecast.coilyco.ai/docs-rail.js"
   to = "/docs-rail.js"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://housecast.coilyco.ai/projects/housecast/*"
+  to = "/projects/housecast/:splat"
   status = 200
   force = true
 
