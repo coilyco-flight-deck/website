@@ -158,6 +158,42 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "https://housecast.coilyco.ai/images/*"
+  to = "/images/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://housecast.coilyco.ai/styles/*"
+  to = "/styles/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://housecast.coilyco.ai/fonts/*"
+  to = "/fonts/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://housecast.coilyco.ai/project-toc.js"
+  to = "/project-toc.js"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://housecast.coilyco.ai/"
+  to = "/vanity/housecast/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://housecast.coilyco.ai/*"
+  to = "https://www.coilysiren.me/:splat"
+  status = 301
+  force = true
+
 # Renamed 2026-08-28: the short form is canon. These two aliases still resolve
 # and hold a certificate, and there is no guarded path to remove an alias yet,
 # so they forward instead of serving the site root. An empty splat resolves to
