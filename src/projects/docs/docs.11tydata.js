@@ -17,6 +17,10 @@ export default {
     // files. Title, shelf, and position come from the manifest by filename.
     project: projectOf,
     mount: (data) => docsMounts[projectOf(data)],
+    // Named rather than hardcoded in the layout, so the guides tree reuses it.
+    mountRoot: (data) => `/projects/${projectOf(data)}/docs/`,
+    mountLabel: "Docs",
+    mountKind: "docs",
     projectPage: (data) => `/projects/${projectOf(data)}/`,
     // A docs page shares its project's social card, so a link to one previews
     // as that project rather than as the site.

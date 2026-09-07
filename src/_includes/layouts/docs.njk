@@ -17,7 +17,7 @@ layout: layouts/base.njk
   <nav class="docs__crumbs" aria-label="Breadcrumb">
     <ol>
       <li><a href="{{ projectPage }}">{{ project }}</a></li>
-      <li><a href="/projects/{{ project }}/docs/">Docs</a></li>
+      <li><a href="{{ mountRoot }}">{{ mountLabel }}</a></li>
       {%- if entry %}
       <li><span>{{ entry.shelf }}</span></li>
       <li aria-current="page">{{ entry.title }}</li>
@@ -27,12 +27,12 @@ layout: layouts/base.njk
 
   <div class="docs__frame">
 
-    <nav class="docs__nav" aria-label="Documentation">
-      <a class="docs__brand" href="/projects/{{ project }}/docs/">
+    <nav class="docs__nav" aria-label="{{ mountLabel }}">
+      <a class="docs__brand" href="{{ mountRoot }}">
         <img src="/images/marks/{{ project }}.png" alt="" width="220" height="220" decoding="async">
         <span>
           <b>{{ project }}</b>
-          <span class="docs__brand-sub">docs</span>
+          <span class="docs__brand-sub">{{ mountKind }}</span>
         </span>
       </a>
       {%- for shelf in mount.shelves %}
@@ -40,7 +40,7 @@ layout: layouts/base.njk
       <ul>
         {%- for page in shelf.pages %}
         <li>
-          <a href="/projects/{{ project }}/docs/{{ page.slug }}/"
+          <a href="{{ mountRoot }}{{ page.slug }}/"
              {% if page.slug == docSlug %}aria-current="page"{% endif %}>{{ page.title }}</a>
         </li>
         {%- endfor %}
@@ -64,13 +64,13 @@ layout: layouts/base.njk
       {%- if position %}
       <nav class="docs__pager" aria-label="Reading order">
         {%- if position.prev %}
-        <a class="docs__pager-link" rel="prev" href="/projects/{{ project }}/docs/{{ position.prev.slug }}/">
+        <a class="docs__pager-link" rel="prev" href="{{ mountRoot }}{{ position.prev.slug }}/">
           <span class="docs__pager-dir">Previous</span>
           <span class="docs__pager-name">{{ position.prev.title }}</span>
         </a>
         {%- else %}<span></span>{% endif %}
         {%- if position.next %}
-        <a class="docs__pager-link docs__pager-link--next" rel="next" href="/projects/{{ project }}/docs/{{ position.next.slug }}/">
+        <a class="docs__pager-link docs__pager-link--next" rel="next" href="{{ mountRoot }}{{ position.next.slug }}/">
           <span class="docs__pager-dir">Next</span>
           <span class="docs__pager-name">{{ position.next.title }}</span>
         </a>

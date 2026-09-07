@@ -69,6 +69,18 @@
  * @property {DocsMountPage[]} flat
  * @property {Set<string>} slugs
  * @property {DocsStamp} source
+ * @property {DocsTree|null} guides Present only where the source repo opted in.
+ */
+
+/**
+ * @typedef {object} DocsTree
+ * @property {string} dir Directory in the source repo.
+ * @property {string} target
+ * @property {string} root Route this tree serves.
+ * @property {DocsShelf[]} shelves
+ * @property {DocsFront} front
+ * @property {DocsMountPage[]} flat
+ * @property {Set<string>} slugs
  */
 
 import { createRequire } from "node:module"
@@ -84,6 +96,23 @@ const flatten = (shelves) =>
   )
 
 // Found by name rather than through a registry, so nothing central changes.
+// No `guides` block means guides is null, and nothing reads it.
+const loadTree = async (mount, spec) => {
+  const { shelves, front } = await import(
+    `./guides-manifest-${mount.project}.js`
+  )
+  const flat = flatten(shelves)
+  return {
+    dir: spec.dir,
+    target: spec.target,
+    root: `/projects/${mount.project}/guides/`,
+    shelves,
+    front,
+    flat,
+    slugs: new Set(flat.map((page) => page.slug)),
+  }
+}
+
 const loadMounts = async () => {
   const entries = await Promise.all(
     config.mounts.map(async (mount) => {
@@ -91,6 +120,7 @@ const loadMounts = async () => {
         `./docs-manifest-${mount.project}.js`
       )
       const flat = flatten(shelves)
+      const guides = mount.guides ? await loadTree(mount, mount.guides) : null
       return [
         mount.project,
         {
@@ -106,6 +136,7 @@ const loadMounts = async () => {
           flat,
           slugs: new Set(flat.map((page) => page.slug)),
           source: stamp[mount.project],
+          guides,
         },
       ]
     })

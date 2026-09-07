@@ -41,3 +41,10 @@ added upstream arrives with the next sync carrying no shelf, title, or reading
 position until the manifest names it, which is the one-line diff it exists for.
 
 Neither needs the Actions tab.
+
+## Guides come from the same clone
+
+A mount with a `guides` block vendors two directories from one shallow clone,
+each into its own target, each with its own exclusion list. The stamp gains a
+`guides` URL beside `docs`. A mount without the block is untouched: one
+directory, one target, the same stamp it always wrote.

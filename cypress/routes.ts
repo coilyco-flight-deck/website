@@ -9,10 +9,11 @@
 //
 // Docs-mount routes are the exception: they derive from the manifests, so a
 // synced page cannot be missing from the accessibility and weight sweeps.
-import { DOCS_ROUTES } from "../src/data/docs-mount-routes.js"
+import { DOCS_ROUTES, GUIDES_ROUTES } from "../src/data/docs-mount-routes.js"
 
 export const ROUTES = [
   ...DOCS_ROUTES,
+  ...GUIDES_ROUTES,
   "/",
   "/404.html",
   "/about/",

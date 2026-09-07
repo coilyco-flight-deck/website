@@ -62,44 +62,78 @@ def wanted(source_docs: Path, exclude: list[str]) -> dict[str, Path]:
     return found
 
 
+def trees(mount: dict) -> list[dict]:
+    """Every directory this mount vendors.
+
+    Reference always. Guides only where the source repo opted in, which is what
+    keeps a repo with no guides/ mounting exactly as it did before the type
+    existed. The two are capped and counted separately upstream.
+    """
+    out = [{
+        "dir": mount.get("docsDir", "docs"),
+        "target": mount["target"],
+        "exclude": mount.get("exclude", []),
+    }]
+    guides = mount.get("guides")
+    if guides:
+        out.append({
+            "dir": guides.get("dir", "guides"),
+            "target": guides["target"],
+            "exclude": guides.get("exclude", []),
+        })
+    return out
+
+
+def vendor(project: str, source: Path, tree: dict, check: bool) -> list[str]:
+    """Copy one directory of one clone into its target. Returns changed paths."""
+    changed: list[str] = []
+    src = source / tree["dir"]
+    if not src.is_dir():
+        raise SystemExit(f"{project}: no {tree['dir']}/ in the source repo")
+    files = wanted(src, tree["exclude"])
+    if not files:
+        raise SystemExit(f"{project}: the exclusion list left {tree['dir']}/ with nothing to mount")
+
+    target = REPO_ROOT / tree["target"]
+    target.mkdir(parents=True, exist_ok=True)
+    # A page dropped upstream has to leave here too, or the mount keeps
+    # serving a route the source repo no longer has.
+    for existing in sorted(target.glob("*.md")):
+        if existing.name not in files:
+            changed.append(f"- {tree['target']}/{existing.name}")
+            if not check:
+                existing.unlink()
+    for name, path in files.items():
+        destination = target / name
+        body = path.read_bytes()
+        if destination.exists() and destination.read_bytes() == body:
+            continue
+        changed.append(f"{'+' if not destination.exists() else '~'} {tree['target']}/{name}")
+        if not check:
+            destination.write_bytes(body)
+    return changed
+
+
 def sync_one(mount: dict, check: bool) -> tuple[dict, list[str]]:
-    """Vendor one mount. Returns (stamp entry, list of changed paths)."""
-    target = REPO_ROOT / mount["target"]
+    """Vendor one mount, every declared tree. Returns (stamp entry, changed)."""
     changed: list[str] = []
     with tempfile.TemporaryDirectory(prefix="docs-mount-") as tmp:
         source = Path(tmp) / mount["project"]
         commit, date = clone(mount, source)
-        docs = source / mount.get("docsDir", "docs")
-        if not docs.is_dir():
-            raise SystemExit(f"{mount['project']}: no {mount.get('docsDir', 'docs')}/ in {mount['repo']}")
-        files = wanted(docs, mount.get("exclude", []))
-        if not files:
-            raise SystemExit(f"{mount['project']}: the exclusion list left nothing to mount")
+        for tree in trees(mount):
+            changed.extend(vendor(mount["project"], source, tree, check))
 
-        target.mkdir(parents=True, exist_ok=True)
-        # A page dropped upstream has to leave here too, or the mount keeps
-        # serving a route the source repo no longer has.
-        for existing in sorted(target.glob("*.md")):
-            if existing.name not in files:
-                changed.append(f"- {mount['target']}/{existing.name}")
-                if not check:
-                    existing.unlink()
-        for name, path in files.items():
-            destination = target / name
-            body = path.read_bytes()
-            if destination.exists() and destination.read_bytes() == body:
-                continue
-            changed.append(f"{'+' if not destination.exists() else '~'} {mount['target']}/{name}")
-            if not check:
-                destination.write_bytes(body)
-
+    branch = mount.get("branch", "main")
     entry = {
         "repo": mount["repo"],
-        "docs": f"{mount['repo']}/src/branch/{mount.get('branch', 'main')}/{mount.get('docsDir', 'docs')}",
+        "docs": f"{mount['repo']}/src/branch/{branch}/{mount.get('docsDir', 'docs')}",
         "commit": commit,
         "date": date,
         "syncedAt": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
     }
+    if mount.get("guides"):
+        guides_dir = mount["guides"].get("dir", "guides")
+        entry["guides"] = f"{mount['repo']}/src/branch/{branch}/{guides_dir}"
     return entry, changed
 
 

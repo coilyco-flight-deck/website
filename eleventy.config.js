@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url"
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight"
 import * as sass from "sass"
 import { docsMountList, docsMounts } from "./src/data/docs-mount-loader.js"
+import { rewriteMountedLinks } from "./src/data/docs-mount-links.js"
 import { imageSize } from "./src/data/image-size.js"
 import { projectCard } from "./src/data/project-cards.js"
 
@@ -63,26 +64,14 @@ export default function configureEleventy(eleventyConfig) {
       : content
   })
 
-  // Vendored docs still carry repo-relative `.md` links, which resolve to
-  // nothing here. Rules and reasoning in docs/project-docs-mount.md.
-  const DOCS_URL = /^\/projects\/([^/]+)\/docs\//
-  // Resolves against the source repo's docs dir the way the file meant it.
-  const inRepo = (mount, target) =>
-    new URL(target, `file:///${mount.docsDir}/`).pathname.replace(/^\//, "")
+  // Vendored pages carry repo-relative `.md` links that resolve to nothing
+  // here. Both trees, and why it is a tested module: project-docs-render.md.
+  const MOUNT_URL = /^\/projects\/([^/]+)\/(docs|guides)\//
   eleventyConfig.addTransform("mountedDocLinks", function (content) {
-    const project = this.page.url?.match(DOCS_URL)?.[1]
-    const mount = project && docsMounts[project]
+    const hit = this.page.url?.match(MOUNT_URL)
+    const mount = hit && docsMounts[hit[1]]
     if (!mount) return content
-    const source = `${mount.repo}/src/branch/${mount.branch}/`
-    return content.replace(
-      /href="(?!https?:)([^"#?]+)\.md(#[^"]*)?"/g,
-      (whole, target, anchor = "") => {
-        const slug = target.split("/").pop().toLowerCase()
-        return mount.slugs.has(slug)
-          ? `href="${mount.root}${slug}/${anchor}"`
-          : `href="${source}${inRepo(mount, target)}.md" rel="noreferrer"`
-      }
-    )
+    return rewriteMountedLinks(content, mount, hit[2])
   })
 
   // One front door per mount. Virtual rather than paginated, for the reason
@@ -103,6 +92,30 @@ export default function configureEleventy(eleventyConfig) {
         ogImage: projectCard(mount.project)?.image,
         ogImageAlt: projectCard(mount.project)?.alt,
         mount,
+      }
+    )
+  }
+
+  // The same front door for a guides shelf, emitted only where one exists.
+  for (const mount of docsMountList.filter((m) => m.guides)) {
+    eleventyConfig.addTemplate(
+      `projects/${mount.project}-guides-index.njk`,
+      '{% include "components/docs-front.njk" %}',
+      {
+        layout: "layouts/base.njk",
+        permalink: `projects/${mount.project}/guides/index.html`,
+        canonical: mount.guides.root,
+        title: `${mount.project} guides | Kai Ase Siren`,
+        description: mount.guides.front.description,
+        robots: "follow, index",
+        project: mount.project,
+        projectPage: mount.page,
+        ogImage: projectCard(mount.project)?.image,
+        ogImageAlt: projectCard(mount.project)?.alt,
+        mount: { ...mount, ...mount.guides, root: mount.guides.root },
+        mountRoot: mount.guides.root,
+        mountLabel: "Guides",
+        mountKind: "guides",
       }
     )
   }

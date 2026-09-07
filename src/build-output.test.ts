@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import { ROUTES } from "../cypress/routes"
-import { DOCS_ROUTES } from "./data/docs-mount-routes.js"
+import { DOCS_ROUTES, GUIDES_ROUTES } from "./data/docs-mount-routes.js"
 
 // These assert what Eleventy emitted, not how it renders, so they read dist/
 // rather than driving a browser. `pnpm run test:quick` builds first.
@@ -33,6 +33,7 @@ const INDEXED = [
   "/writing/",
   ...PROMOTED_POSTS,
   ...DOCS_ROUTES,
+  ...GUIDES_ROUTES,
 ].sort()
 // The apex 301s here, so a canonical URL naming the apex would resolve
 // through a redirect. One host, everywhere.

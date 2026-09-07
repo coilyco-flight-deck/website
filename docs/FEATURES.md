@@ -43,8 +43,11 @@ feature is added, removed, or reshaped, so the diff shows scope drift.
   page, with the section tree, reading order, and prev and next all derived
   from one manifest, re-vendored daily from the source repository by
   `sync-project-docs`. umbra, agent-compose, mcp-beaver, and housecast are
-  mounted, and the pages are indexed. See [the mount](project-docs-mount.md)
-  and [its sync](project-docs-sync.md).
+  mounted, and the pages are indexed. A project's `guides/` mounts the same way
+  at `/projects/<project>/guides/` where the repo declares one, kept a separate
+  tree because upstream caps and counts the two types separately. See
+  [the mount](project-docs-mount.md), [its render](project-docs-render.md), and
+  [its sync](project-docs-sync.md).
 - **Discovery metadata** - one canonical host across tags, sitemap, `robots.txt`
   and `llms.txt`, a `sitemap.xml` generated from the indexable routes, and
   `Person` structured data on the homepage and About page. See [static

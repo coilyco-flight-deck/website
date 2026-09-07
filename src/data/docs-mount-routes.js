@@ -13,9 +13,23 @@ const manifests = {
   umbra,
 }
 
+// One entry per project that declares a `guides` block in docs-mounts.json.
+const guideManifests = {}
+
 export const DOCS_ROUTES = config.mounts.flatMap(({ project }) => [
   `/projects/${project}/docs/`,
   ...manifests[project].shelves.flatMap((shelf) =>
     shelf.pages.map((page) => `/projects/${project}/docs/${page.slug}/`)
   ),
 ])
+
+// Opt-in, so empty until a repo declares one. Separate from DOCS_ROUTES
+// because upstream counts and caps the two types separately.
+export const GUIDES_ROUTES = config.mounts
+  .filter(({ guides }) => guides)
+  .flatMap(({ project }) => [
+    `/projects/${project}/guides/`,
+    ...guideManifests[project].shelves.flatMap((shelf) =>
+      shelf.pages.map((page) => `/projects/${project}/guides/${page.slug}/`)
+    ),
+  ])

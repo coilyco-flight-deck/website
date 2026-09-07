@@ -30,7 +30,16 @@ Use the pages below as the canonical public profile. Other routes are retained o
 {% for page in shelf.pages %}
 - [{{ page.title }}]({{ site.url }}{{ mount.root }}{{ page.slug }}/): {{ page.blurb }}
 {%- endfor %}
-{% endfor %}{% endfor %}
+{% endfor %}{% if mount.guides %}
+## {{ mount.project }} guides
+
+End-to-end walkthroughs, separate from the reference above and scarce on purpose. The [front door]({{ site.url }}{{ mount.guides.root }}) lists every shelf.
+{% for shelf in mount.guides.shelves %}
+### {{ shelf.title }}
+{% for page in shelf.pages %}
+- [{{ page.title }}]({{ site.url }}{{ mount.guides.root }}{{ page.slug }}/): {{ page.blurb }}
+{%- endfor %}
+{% endfor %}{% endif %}{% endfor %}
 ## Writing
 
 The [writing index](https://www.coilysiren.me/writing/) lists the promoted posts. Three are promoted. The rest of the archive is retained at its URLs but is not current.

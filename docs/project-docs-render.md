@@ -22,6 +22,42 @@ Three steps, and none of them is a template or a route list.
 `src/docs-mount.test.ts` fails if a declared mount has no manifest, so a missed
 step is a test failure rather than a broken page.
 
+## Adding a guides tree
+
+A project's `guides/` is a second, optional tree beside `docs/`. Upstream they
+are separate types with separate caps, counted independently, and this side
+keeps that split rather than folding guides into the docs shelf. A repo that
+declares no guides mounts exactly as it did before the type existed.
+
+Four steps, mirroring the three above:
+
+1. A `guides` block on that project's entry in `src/data/docs-mounts.json`,
+   naming `dir` and `target`.
+2. `src/data/guides-manifest-<project>.js`, the same `shelves` and `front`
+   shape as a docs manifest.
+3. One import line and one `guideManifests` entry in
+   `src/data/docs-mount-routes.js`, for the bundler reason above.
+4. `just sync-project-docs`, which vendors every declared tree of a mount from
+   the one clone.
+
+`GUIDES_ROUTES` feeds `cypress/routes.ts` and `src/build-output.test.ts` the
+way `DOCS_ROUTES` does, so a mounted guide is swept for accessibility and named
+in the sitemap without a second list to keep.
+
+## Cross-links between the two trees
+
+`check_dead_links.py` resolves a relative link against the file's own
+directory, so a guide reaches reference as `../docs/<name>.md` and a docs page
+reaches a guide as `../guides/<name>.md`. `rewriteMountedLinks` in
+`src/data/docs-mount-links.js` resolves that hop and sends the link to whichever
+tree actually serves it.
+
+That function is a module with its own test rather than a closure in
+`eleventy.config.js`, because its failure is silent: matching on the filename
+alone still emits a working link, just to the source repository or to the wrong
+tree's page of the same name. Nothing downstream reports it, so the negative
+cases are asserted instead.
+
 ## The manifest is the structure
 
 `documentation-layout` permits `docs/*.md` with no subdirectories, so a repo

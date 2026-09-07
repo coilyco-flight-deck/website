@@ -7,7 +7,12 @@ import { docsMounts } from "./data/docs-mount-loader.js"
 const config = JSON.parse(
   readFileSync("src/data/docs-mounts.json", "utf8")
 ) as {
-  mounts: { project: string; target: string; exclude: string[] }[]
+  mounts: {
+    project: string
+    target: string
+    exclude: string[]
+    guides?: { dir: string; target: string; exclude?: string[] }
+  }[]
 }
 const stamp = JSON.parse(
   readFileSync("src/data/docs-mount-source.json", "utf8")
@@ -65,6 +70,50 @@ describe("project docs mount", () => {
       const loaded = docsMounts[mount.project]
       expect(loaded!.source.repo).toContain("forgejo.coilysiren.me")
       expect(loaded!.source.commit).toBe(stamp[mount.project]?.commit)
+    }
+  })
+
+  // Guides are opt-in, so these assert the shape where a mount declares one
+  // and assert the absence where it does not. teable:coilyco-flight-deck/website#7079.
+  it("resolves a guides tree exactly where one is declared", () => {
+    for (const mount of config.mounts) {
+      const loaded = docsMounts[mount.project]
+      if (!mount.guides) {
+        expect(
+          loaded!.guides,
+          `${mount.project} declares no guides and must resolve none`
+        ).toBeNull()
+        continue
+      }
+      const tree = loaded!.guides
+      expect(
+        tree,
+        `no guides manifest resolved for ${mount.project}`
+      ).toBeTruthy()
+      expect(tree!.root).toBe(`/projects/${mount.project}/guides/`)
+      expect(tree!.dir).toBe(mount.guides.dir)
+      expect(tree!.shelves.length).toBeGreaterThan(0)
+      expect(
+        tree!.front?.headline,
+        `${mount.project} guides front.headline`
+      ).toBeTruthy()
+    }
+  })
+
+  it("keeps every guides manifest and its vendored files in agreement", () => {
+    for (const mount of config.mounts) {
+      if (!mount.guides) continue
+      const onDisk = readdirSync(mount.guides.target)
+        .filter((name) => name.endsWith(".md"))
+        .map((name) => name.replace(/\.md$/, ""))
+        .sort()
+      const inManifest = docsMounts[mount.project]!.guides!.flat.map(
+        (page) => page.slug
+      ).sort()
+      expect(
+        onDisk,
+        `src/data/guides-manifest-${mount.project}.js does not match what the sync vendored`
+      ).toEqual(inManifest)
     }
   })
 
